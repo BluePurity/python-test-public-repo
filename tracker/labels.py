@@ -4,11 +4,11 @@ import pipes
 
 
 def weight_label(kg):
-    return locale.format("%.1f", kg) + " kg"
+    return locale.format_string("%.1f", kg) + " kg"
 
 
 def price_label(amount):
-    return "GBP " + locale.format("%.2f", amount, grouping=True)
+    return "GBP " + locale.format_string("%.2f", amount, grouping=True)
 
 
 def print_command(printer, label_file):
