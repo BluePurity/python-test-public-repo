@@ -2,17 +2,15 @@
 import asyncio
 
 
-@asyncio.coroutine
-def poll(shipment_id):
-    yield from asyncio.sleep(0)
+async def poll(shipment_id):
+    await asyncio.sleep(0)
     return {"id": shipment_id, "status": "in_transit" if shipment_id % 2 else "delivered"}
 
 
-@asyncio.coroutine
-def poll_all(ids):
+async def poll_all(ids):
     results = []
     for i in ids:
-        r = yield from poll(i)
+        r = await poll(i)
         results.append(r)
     return results
 
