@@ -1,8 +1,9 @@
 """Shipment registry. Legacy: subclasses collections.MutableMapping (removed in 3.10)."""
 import collections
+import collections.abc
 
 
-class Registry(collections.MutableMapping):
+class Registry(collections.abc.MutableMapping):
     def __init__(self):
         self._items = {}
 
@@ -10,7 +11,7 @@ class Registry(collections.MutableMapping):
         return self._items[key]
 
     def __setitem__(self, key, value):
-        if not isinstance(value, collections.Mapping):
+        if not isinstance(value, collections.abc.Mapping):
             raise TypeError("shipment must be a mapping")
         self._items[str(key).upper()] = dict(value)
 
@@ -25,7 +26,7 @@ class Registry(collections.MutableMapping):
 
 
 def total_weight(shipments):
-    if not isinstance(shipments, collections.Iterable):
+    if not isinstance(shipments, collections.abc.Iterable):
         raise TypeError("shipments must be iterable")
     return round(sum(float(s.get("weight", 0)) for s in shipments), 3)
 
