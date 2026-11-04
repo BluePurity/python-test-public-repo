@@ -3,10 +3,10 @@ import inspect
 
 
 def hook_signature(fn):
-    spec = inspect.getargspec(fn)
-    return {"args": spec.args, "varargs": spec.varargs, "keywords": spec.keywords,
+    spec = inspect.getfullargspec(fn)
+    return {"args": spec.args, "varargs": spec.varargs, "keywords": spec.varkw,
             "defaults": list(spec.defaults or ())}
 
 
 def wants_context(fn):
-    return "context" in inspect.getargspec(fn).args
+    return "context" in inspect.getfullargspec(fn).args
